@@ -1,0 +1,276 @@
+﻿@{
+    ViewData["Title"] = "Liveness Detection";
+    ViewData["Heading"] = "Liveness Detection";
+}
+<div class="row mb-4">
+    <div class="col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+        <p>
+            <strong>Test our live detection API by sending two selfies to our BioID Web Service.</strong>
+        </p>
+        <p>
+            Click <b class="text-primary">START</b> to begin image capturing, then simply nod your head a bit to capture the second image.
+        </p>
+        <p>
+            This application uses the <a href="https://developer.bioid.com/bwsreference/web-api/livedetection-web-api" target="_blank">LiveDetection API</a>.
+        </p>
+        <div class="d-flex justify-content-center" id="howtovideodiv">
+            <div class="with-overlay" style="max-width: 30rem">
+                <video src="~/videos/LivenessDetection-HowTo.mp4" id="howtovideo" class="img-fluid" title="Click to start/stop this video." autoplay="" playsinline="" loop="" muted=""></video>
+                <div class="overlay-tr">
+                    <button type="button" id="closehowtovideo" class="btn-close" aria-label="Close video" title="Close the video"></button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href="https://youtu.be/fBbVBIub50I" target="_blank" title="Liveness Detection - Full Instruction">
+                To the full instruction
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                    <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6 offset-xxl-4 col-xxl-4">
+        <h4>One click &ndash; two selfies</h4>
+        <div class="row mb-5">
+            <div class="col-6">
+                <div class="d-flex justify-content-center">
+                    <div class="border img-fluid">
+                        <canvas class="align-bottom mw-100" id="drawingcanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div id="result-view" class="col-6 d-flex flex-column justify-content-end">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-6">
+                            <div>SELFIE 1</div>
+                            <img class="border img-fluid w-100" id="image1" src="/images/bg-placeholder.svg">
+                        </div>
+                        <div class="col-6">
+                            <div>SELFIE 2</div>
+                            <img class="border img-fluid w-100" id="image2" src="/images/bg-placeholder.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>PERFORM OPERATION</h4>
+        <div class="d-flex justify-content-center">
+            <form method="post" id="capture-form">
+                <div class="me-1"><button id="capture" class="btn btn-success">Start</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="howItWorks" tabindex="-1" role="dialog" aria-labelledby="howItWorksLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-tr" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="text-uppercase" id="howItWorksLabel">How it works</h1>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 border-right-md">
+                            <h2 class="text-uppercase">Step 1</h2>
+                            <h4>Before you start</h4>
+                            <p>Come closer to the camera as shown below.</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div>
+                                    <div class="text-danger"><b>Too far away!</b></div>
+                                    <img class="img-fluid" src="~/images/TooFarAway.png">
+                                </div>
+                                <div>
+                                    <div class="text-danger"><b>Too close!</b></div>
+                                    <img class="img-fluid" src="~/images/TooClose.png">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-success"><b>Perfect!</b></div>
+                                <img class="img-fluid" src="~/images/Perfect.png">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="text-uppercase">Step 2</h2>
+                            <h4>For Liveness Detection</h4>
+                            <p>Press the start button, then nod your head slightly like shown in the video.</p>
+                            <div class="mb-2">
+                                <video src="/videos/NodHead.mp4" class="img-fluid" autoplay="" playsinline="" loop="" muted="" oncontextmenu="return false;"></video>
+                            </div>
+                            <p>
+                                Please don't move  the device.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 d-lg-none">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">I'm ready to start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- start video, motion detection, etc. -->
+    <script src="~/js/videoCapture.js"></script>
+
+    <script type="text/javascript">
+        const motionAreaHeight = 160;
+        const motionThreshold = isMobileDevice() ? 50 : 20;
+        var template = null;
+        var capturing = false;
+        var video = document.createElement('video');
+        video.setAttribute('playsinline', '');
+        var drawingCanvas = document.getElementById('drawingcanvas');
+        var motionCanvas = document.createElement('canvas');
+
+        var firstCapturedImage, secondCapturedImage;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = OnReadyStateChange;
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            document.getElementById('capture').addEventListener('click', capture);
+
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+            popoverTriggerList.map(function (popoverTriggerEl) { return new bootstrap.Popover(popoverTriggerEl) });
+
+            document.getElementById('howtovideo').addEventListener('click', () => {
+                let howtovideo = document.getElementById('howtovideo');
+                if (howtovideo.paused) { howtovideo.play(); }
+                else { howtovideo.pause(); }
+            });
+            document.getElementById('closehowtovideo').addEventListener('click', () => { document.getElementById('howtovideodiv').remove(); });
+
+            startVideo(video, initCanvases);
+        });
+
+        function capture(e) {
+            e.preventDefault();
+
+            // replace result with empty images
+            fetch('/LivenessDetection/EmptyResult')
+                .then((response) => {
+                    return response.text();
+                })
+                .then((result) => {
+                    document.getElementById('result-view').innerHTML = result;
+                    document.getElementById('captureSpinner').style.display = "inline-block";
+                    capturing = true;
+                });
+
+            firstCapturedImage = null;
+            secondCapturedImage = null;
+            document.getElementById('capture').disabled = true;
+        }
+
+        function initCanvases(videoElement, mediaStream) {
+            // we prefer 3 : 4 face image resolution
+            let aspectratio = videoElement.videoWidth / videoElement.videoHeight < 3 / 4 ? videoElement.videoWidth / videoElement.videoHeight : 3 / 4;
+            drawingCanvas.height = videoElement.videoHeight;
+            drawingCanvas.width = drawingCanvas.height * aspectratio;
+            motionCanvas.height = motionAreaHeight;
+            motionCanvas.width = motionCanvas.height * aspectratio;
+
+            drawingCanvas.title = `Capturing ${videoElement.videoWidth}x${videoElement.videoHeight}px (cropped to ${drawingCanvas.width}x${drawingCanvas.height}) from ${mediaStream.getVideoTracks()[0].label}.`
+
+            // mirror live preview
+            let ctx = drawingCanvas.getContext('2d');
+            ctx.translate(drawingCanvas.width, 0);
+            ctx.scale(-1, 1);
+            // set an interval-timer to grab about 20 frames per second
+            setInterval(processFrame, 50);
+        }
+
+        function processFrame() {
+            let w = drawingCanvas.width, h = drawingCanvas.height, aspectratio = w / h;
+            let cutoff = video.videoWidth - (video.videoHeight * aspectratio);
+            let ctx = drawingCanvas.getContext('2d');
+            ctx.drawImage(video, cutoff / 2, 0, video.videoWidth - cutoff, video.videoHeight, 0, 0, w, h);
+
+            if (capturing) {
+                // scale current image into the motion canvas
+                let motionctx = motionCanvas.getContext('2d');
+                motionctx.drawImage(drawingCanvas, w / 8, h / 8, w - w / 4, h - h / 4, 0, 0, motionCanvas.width, motionCanvas.height);
+                let currentImageData = motionctx.getImageData(0, 0, motionCanvas.width, motionCanvas.height);
+
+                if (template) {
+                    let movement = motionDetection(currentImageData, template);
+                    // trigger if movementPercentage is above threshold (default: when 20% of maximum movement is exceeded)
+                    if (movement > motionThreshold) {
+                        capturing = false;
+                        template = null;
+                        drawingCanvas.toBlob(handleImage2)
+                        console.log('captured second image');
+                    }
+                } else {
+                    // use as template
+                    template = createTemplate(currentImageData);
+                    // capture the current image
+                    drawingCanvas.toBlob(setImage1)
+                    console.log('captured first image');
+                }
+            }
+
+            ctx.beginPath();
+            ctx.arc(w / 2, h / 2, w * 0.4, 0, 2 * Math.PI);
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#fff';
+            ctx.stroke();
+            ctx.rect(0, 0, w, h);
+            ctx.fillStyle = 'rgba(220, 220, 220, 0.8)';
+            ctx.fill('evenodd');
+
+        }
+
+        function setImage1(blob) {
+            if (blob && blob.type.startsWith('image/')) {
+                firstCapturedImage = blob;
+                let image1 = document.getElementById('image1');
+                image1.src = window.URL.createObjectURL(blob);
+                image1.onload = function () { window.URL.revokeObjectURL(this.src); }
+            }
+        }
+        function setImage2(blob) {
+            if (blob && blob.type.startsWith('image/')) {
+                secondCapturedImage = blob;
+                let image2 = document.getElementById('image2');
+                image2.src = window.URL.createObjectURL(blob);
+                image2.onload = function () { window.URL.revokeObjectURL(this.src); }
+            }
+        }
+        function handleImage2(blob) {
+            setImage2(blob);
+            setTimeout(sendImages);
+        }
+
+        function sendImages() {
+            document.getElementById('captureSpinner').style.display = "none";
+            document.getElementById('progressSpinner').style.display = "inline-block";
+
+            var formData = new FormData(document.getElementById('capture-form'));
+            formData.append('image1', firstCapturedImage);
+            formData.append('image2', secondCapturedImage);
+            xhr.open("POST", "/LivenessDetection/Process");
+            xhr.send(formData);
+        }
+
+        function OnReadyStateChange() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                    let captureView = document.getElementById('result-view');
+                    captureView.innerHTML = this.responseText;
+                    setImage1(firstCapturedImage);
+                    setImage2(secondCapturedImage);
+                } else {
+                    alert('There was an error processing the AJAX request: ' + xhr.responseText);
+                }
+                document.getElementById('capture').disabled = false;
+            }
+        };
+
+    </script>
+}

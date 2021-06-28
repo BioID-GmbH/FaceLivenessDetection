@@ -1,0 +1,57 @@
+﻿@model LivenessDetectionResultModel
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorString))
+{
+    <div class="w-100 text-center text-danger mb-3 text-break">@Model.ErrorString</div>
+    <div class="w-100">
+        <div class="row">
+            <div class="col-6">
+                <div>SELFIE 1</div>
+                <img class="border img-fluid w-100" id="image1" src="~/images/bg-placeholder.png">
+            </div>
+            <div class="col-6">
+                <div>SELFIE 2</div>
+                <img class="border img-fluid w-100" id="image2" src="~/images/bg-placeholder.png">
+            </div>
+        </div>
+    </div>
+}
+else @if (Model.Live)
+{
+<p><img src="~/images/pokal_icon.svg" width="32" alt="congratulation" /></p>
+<small>BWS Liveness Detection says:</small>
+<h4 class="text-primary mb-4">This was live!</h4>
+<div class="w-100">
+    <div class="row">
+        <div class="col-6">
+            <div class="text-success">SELFIE 1</div>
+            <img class="border border-2 border-success img-fluid w-100" id="image1" style="min-height:4rem;">
+        </div>
+        <div class="col-6">
+            <div class="text-success">SELFIE 2</div>
+            <img class="border border-2 border-success img-fluid w-100" id="image2" style="min-height:4rem;">
+        </div>
+    </div>
+</div>
+}
+else
+{
+<small>BWS Liveness Detection says:</small>
+<h4 class="text-danger">This was fake!</h4>
+<div class="mb-2">
+    You were wrongly classified as fake?<br />
+    <a href="/" data-bs-toggle="modal" data-bs-target="#howItWorks">See the full instruction</a>
+</div>
+<div class="w-100">
+    <div class="row">
+        <div class="col-6">
+            <div>SELFIE 1</div>
+            <img class="border img-fluid w-100" id="image1" src="~/images/bg-placeholder.svg">
+        </div>
+        <div class="col-6">
+            <div>SELFIE 2</div>
+            <img class="border img-fluid w-100" id="image2" src="~/images/bg-placeholder.svg">
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="BioID Demo for Liveness Detection and PhotoVerify.">
+    <meta name="author" content="BioID GmbH">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>@ViewBag.Title</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/bioid.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/bioid.min.css" />
+    </environment>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+            <h5 class="navbar-title">@ViewBag.Heading</h5>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/" title="BioID Demo Home">
+                    <img class="navbar-logo" src="~/images/bioid-berecognized.svg" alt="BioID Demo Home" />
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+
+    <hr class="mt-4" />
+
+    <footer>
+        <p class="small">
+            &copy; @DateTime.Now.Year - <a href="https://www.bioid.com" title="BioID">BioID GmbH</a> | <a href="https://github.com/BioID-GmbH/" title="BioID at GitHub">GitHub</a> |
+            <a href="https://www.bioid.com/imprint/" title="Imprint">Imprint</a> | <a href="https://www.bioid.com/privacy-policy-web/" title="Privacy Policy">Privacy Policy</a> |
+            <a href="https://www.bioid.com/contact/" title="Contact us">Contact</a>
+        </p>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,311 @@
+﻿@{
+    ViewData["Title"] = "PhotoVerify";
+    ViewData["Heading"] = "PhotoVerify";
+}
+
+<div class="row mb-4">
+    <div class="col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+        <p>
+            This demo performs a liveness detection on two selfies to verify whether they were recorded from a live person.
+            Additionally, it performs a one-to-one comparison with the ID photo submitted in order to verify whether the
+            live images and ID photo belong to the same person.
+        </p>
+        <p>
+            This application uses the <a href="https://developer.bioid.com/bwsreference/web-api/photoverify-web-api" target="_blank">PhotoVerify API</a>.
+        </p>
+    </div>
+    <div class="d-flex justify-content-center" id="howtovideodiv">
+        <div class="with-overlay" style="max-width: 30rem">
+            <video src="~/videos/PhotoVerify-HowTo.mp4" id="howtovideo" class="img-fluid" title="Click to start/stop this video." autoplay="" playsinline="" loop="" muted=""></video>
+            <div class="overlay-tr">
+                <button type="button" id="closehowtovideo" class="btn-close" aria-label="Close video" title="Close the video"></button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="https://www.youtube.com/watch?v=EMYCZdBDT54" target="_blank" title="PhotoVerify - Full Instruction">
+            To the full instruction
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+        <div class="row mb-4">
+            <div class="col-sm-7 d-flex flex-column justify-content-between mb-sm-0 mb-3">
+                <h4>STEP 1: ID Photo</h4>
+                <div class="mb-3">
+                    <p>Choose or drop a file here:</p>
+                    <label for="select-photo" id="image-file" class="btn btn-outline-success text-lowercase">no file selected yet</label>
+                    <input type="file" id="select-photo" name="photo" class="d-none" accept="image/png,image/bmp,image/x-bmp,image/jpeg,image/tiff,image/gif,image/jp2">
+                </div>
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-4">
+                            <div>ID-PHOTO</div>
+                            <img class="border img-fluid w-100" id="id-photo" src="~/images/bg-placeholder.svg">
+                        </div>
+                        <div class="col-4">
+                            <div>SELFIE 1</div>
+                            <img class="border img-fluid w-100" id="image1" src="~/images/bg-placeholder.svg">
+                        </div>
+                        <div class="col-4">
+                            <div>SELFIE 2</div>
+                            <div class="with-overlay">
+                                <img class="border img-fluid w-100" id="image2" src="~/images/bg-placeholder.svg">
+                                <div class="overlay-cb1" id="captureSpinner" style="display:none;">
+                                    <div class="spinner-grow text-danger" role="status"></div>
+                                    <div>Please&nbsp;nod your&nbsp;head.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 offset-2 col-sm-5 offset-sm-0">
+                <h4>STEP 2: One click &ndash; two selfies</h4>
+                <p class="small lh-sm">
+                    Click once on the camera-button to capture two selfies.
+                    To capture the second image just nod your head a little bit.
+                </p>
+                <div class="d-flex justify-content-center">
+                    <div class="with-overlay">
+                        <div class="border img-fluid">
+                            <canvas class="align-bottom mw-100" id="drawingcanvas"></canvas>
+                        </div>
+                        <div class="overlay-cb1">
+                            <button id="capture" class="btn btn-outline-success btn-circle" title="start capturing two selfies">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-camera-fill" style="vertical-align: top;" viewBox="0 0 16 16">
+                                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <form method="post" id="processForm">
+                <div>
+                    <button type="button" id="execute" class="btn btn-success" disabled>
+                        <span id="processSpinner" class="spinner-border spinner-border-sm" style="display:none;" role="status"><span class="visually-hidden">processing ...</span></span>
+                        Perform Operation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="operationResult" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="operationResultLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="operationResultLabel">Your PhotoVerify result</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="result-view"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <!-- start video, motion detection, etc. -->
+    <script src="~/js/videoCapture.js"></script>
+
+    <script type="text/javascript">
+        const motionAreaHeight = 160;
+        const motionThreshold = isMobileDevice() ? 50 : 20;
+        var template = null;
+        var capturing = false;
+        var video = document.createElement('video');
+        video.setAttribute('playsinline', '');
+        var drawingCanvas = document.getElementById('drawingcanvas');
+        var motionCanvas = document.createElement('canvas');
+
+        var firstCapturedImage, secondCapturedImage, photo;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = OnReadyStateChange;
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            document.getElementById('select-photo').addEventListener('change', function (ev) { handlePhoto(ev.target.files[0]); });
+
+            let file = document.getElementById('image-file');
+            file.addEventListener('dragenter', (ev) => { ev.stopPropagation(); ev.preventDefault(); });
+            file.addEventListener('dragover', (ev) => { ev.stopPropagation(); ev.preventDefault(); });
+            file.addEventListener('drop', (ev) => {
+                ev.stopPropagation();
+                ev.preventDefault();
+                // Use DataTransfer interface to access the file(s)
+                if (ev.dataTransfer.files) {
+                    handlePhoto(ev.dataTransfer.files[0]);
+                }
+            });
+            let idphoto = document.getElementById('id-photo');
+            idphoto.addEventListener('dragenter', (ev) => { ev.stopPropagation(); ev.preventDefault(); });
+            idphoto.addEventListener('dragover', (ev) => { ev.stopPropagation(); ev.preventDefault(); });
+            idphoto.addEventListener('drop', (ev) => {
+                ev.stopPropagation();
+                ev.preventDefault();
+                // Use DataTransfer interface to access the file(s)
+                if (ev.dataTransfer.files) {
+                    handlePhoto(ev.dataTransfer.files[0]);
+                }
+            });
+
+            document.getElementById('howtovideo').addEventListener('click', () => {
+                let howtovideo = document.getElementById('howtovideo');
+                if (howtovideo.paused) { howtovideo.play(); }
+                else { howtovideo.pause(); }
+            });
+            document.getElementById('closehowtovideo').addEventListener('click', () => { document.getElementById('howtovideodiv').remove(); });
+
+            document.getElementById('capture').addEventListener('click', capture);
+            document.getElementById('execute').addEventListener('click', execute);
+
+            startVideo(video, initCanvases);
+        });
+
+        function enableProcess() {
+            let missing = !firstCapturedImage || !secondCapturedImage || !photo;
+            document.getElementById('execute').disabled = missing;
+        }
+
+        function handlePhoto(blob) {
+            if (blob && blob.type.startsWith('image/')) {
+                console.log('Loading file:', blob);
+                photo = blob;
+                document.getElementById('image-file').innerText = blob.name;
+                let idphoto = document.getElementById('id-photo')
+                idphoto.src = window.URL.createObjectURL(blob);
+                idphoto.onload = () => { window.URL.revokeObjectURL(this.src); enableProcess();
+                }
+            }
+        }
+
+        function capture(e) {
+            e.preventDefault();
+            document.getElementById('capture').disabled = true;
+            firstCapturedImage = null;
+            secondCapturedImage = null;
+            document.getElementById('image1').src = "/images/bg-placeholder.svg";
+            document.getElementById('image2').src = "/images/bg-placeholder.svg";
+            enableProcess();
+            capturing = true;
+        }
+
+        function initCanvases(videoElement, mediaStream) {
+            // we prefer 3 : 4 face image resolution
+            let aspectratio = videoElement.videoWidth / videoElement.videoHeight < 3 / 4 ? videoElement.videoWidth / videoElement.videoHeight : 3 / 4;
+            drawingCanvas.height = videoElement.videoHeight;
+            drawingCanvas.width = drawingCanvas.height * aspectratio;
+            motionCanvas.height = motionAreaHeight;
+            motionCanvas.width = motionCanvas.height * aspectratio;
+            drawingCanvas.title = `Capturing ${videoElement.videoWidth}x${videoElement.videoHeight}px (cropped to ${drawingCanvas.width}x${drawingCanvas.height}) from ${mediaStream.getVideoTracks()[0].label}.`
+            // mirror live preview
+            let ctx = drawingCanvas.getContext('2d');
+            ctx.translate(drawingCanvas.width, 0);
+            ctx.scale(-1, 1);
+            // set an interval-timer to grab about 20 frames per second
+            setInterval(processFrame, 50);
+        }
+
+        function processFrame() {
+            let w = drawingCanvas.width, h = drawingCanvas.height, aspectratio = w / h;
+            let cutoff = video.videoWidth - (video.videoHeight * aspectratio);
+            let ctx = drawingCanvas.getContext('2d');
+            ctx.drawImage(video, cutoff / 2, 0, video.videoWidth - cutoff, video.videoHeight, 0, 0, w, h);
+
+            if (capturing) {
+                // scale current image into the motion canvas
+                let motionctx = motionCanvas.getContext('2d');
+                motionctx.drawImage(drawingCanvas, w / 8, h / 8, w - w / 4, h - h / 4, 0, 0, motionCanvas.width, motionCanvas.height);
+                let currentImageData = motionctx.getImageData(0, 0, motionCanvas.width, motionCanvas.height);
+
+                if (template) {
+                    let movement = motionDetection(currentImageData, template);
+                    // trigger if movementPercentage is above threshold (default: when 20% of maximum movement is exceeded)
+                    if (movement > motionThreshold) {
+                        capturing = false;
+                        template = null;
+                        drawingCanvas.toBlob(setImage2)
+                        document.getElementById('captureSpinner').style.display = "none";
+                        document.getElementById('capture').disabled = false;
+                    }
+                } else {
+                    // use as template
+                    template = createTemplate(currentImageData);
+                    // capture the current image
+                    drawingCanvas.toBlob(setImage1)
+                    document.getElementById('captureSpinner').style.display = "block";
+                }
+            }
+
+            ctx.beginPath();
+            ctx.arc(w / 2, h / 2, w * 0.4, 0, 2 * Math.PI);
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#fff';
+            ctx.stroke();
+            ctx.rect(0, 0, w, h);
+            ctx.fillStyle = 'rgba(220, 220, 220, 0.8)';
+            ctx.fill('evenodd');
+        }
+
+        function setImage1(blob) {
+            if (blob && blob.type.startsWith('image/')) {
+                console.log('captured first image');
+                firstCapturedImage = blob;
+                let image1 = document.getElementById('image1');
+                image1.src = window.URL.createObjectURL(blob);
+                image1.onload = () => { window.URL.revokeObjectURL(this.src); enableProcess(); };
+            }
+        }
+        function setImage2(blob) {
+            if (blob && blob.type.startsWith('image/')) {
+                console.log('captured second image');
+                secondCapturedImage = blob;
+                let image2 = document.getElementById('image2');
+                image2.src = window.URL.createObjectURL(blob);
+                image2.onload = () => { window.URL.revokeObjectURL(this.src); enableProcess(); };
+            }
+        }
+
+        function execute() {
+            document.getElementById('execute').disabled = true;
+            document.getElementById('processSpinner').style.display = "inline-block";
+
+            let formData = new FormData(document.getElementById('processForm'));
+            formData.append('idphoto', photo);
+            formData.append('image1', firstCapturedImage);
+            formData.append('image2', secondCapturedImage);
+            xhr.open("POST", "/PhotoVerify/Process");
+            xhr.send(formData);
+        }
+
+        function OnReadyStateChange() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                    let resultView = document.getElementById('result-view');
+                    resultView.innerHTML = this.responseText;
+
+                    let resultModal = new bootstrap.Modal(document.getElementById('operationResult'));
+                    resultModal.show();
+                } else {
+                    alert('There was an error processing the AJAX request: ' + xhr.responseText);
+                }
+                document.getElementById('processSpinner').style.display = "none";
+                enableProcess();
+            }
+        };
+
+    </script>
+}

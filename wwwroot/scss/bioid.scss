@@ -1,0 +1,269 @@
+﻿// import our customized Bootstrap variables
+@import "bootstrap";
+
+// main layout
+
+body {
+}
+
+main {
+    // keep some space on top for the navbar
+    > .container-fluid {
+        padding-top: 7rem;
+    }
+}
+
+a {
+    //font-weight: $font-weight-semi-bold;
+}
+
+// the fixed navbar style
+.navbar {
+    min-height: 5.15rem;
+    padding: 1rem;
+
+    .navbar-title {
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translate(-50%);
+        padding: 0 2rem;
+    }
+
+    .navbar-brand {
+        width: 7rem;
+        height: 3.15rem;
+    }
+
+    .navbar-logo {
+        width: 7rem;
+    }
+
+    &.bg-light {
+        background-color: #f1f1f1;
+        box-shadow: 0 3px 3px #e0e0e0;
+    }
+
+    @include media-breakpoint-up(md) {
+        &.bg-light {
+            background-color: rgba(#f0f0f0, .95) !important;
+            box-shadow: 0 3px 3px rgba(#e0e0e0, .95);
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding: 1rem 4rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+        padding: 1rem 7rem;
+    }
+
+    @include media-breakpoint-up(xxl) {
+        padding: 1rem 10rem;
+    }
+}
+
+// our custom buttons
+
+.btn {
+    text-transform: uppercase;
+
+    &-success,
+    &-info,
+    &-warning {
+        color: $white;
+
+        &:hover,
+        &:focus {
+            color: $white;
+        }
+    }
+
+    &-success:hover, &-outline-success:hover,
+    &-sucess:focus, &-outline-success:focus {
+        color: $white;
+        background-color: $dark-green; // ~ shade-color($bioid-green, 20%);
+    }
+}
+
+.btn-nav {
+    position: fixed;
+    width: 7.5rem;
+    height: 5.25rem;
+    top: 0rem;
+    right: 0;
+    padding: 0.5rem;
+    border-radius: 0;
+    font-size: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > svg {
+        font-size: 3em;
+        margin-bottom: 0.5rem;
+    }
+
+    &:hover, &:focus {
+        background-color: $bioid-green;
+        border-color: $bioid-green;
+    }
+
+    &.btn-nav1 {
+        top: 7rem;
+    }
+
+    &.btn-nav2 {
+        top: 13rem;
+    }
+
+    &.btn-nav3 {
+        top: 19rem;
+    }
+}
+
+.scrollToTopBtn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all .8s ease;
+    padding: 0.5rem;
+}
+
+.showBtn {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.demo {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 6rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+    }
+
+    button:last-child, a:last-child {
+        margin-top: auto
+    }
+}
+
+.graybox {
+    padding: 1rem;
+    background-color: $light-gray;
+    box-shadow: 3px 3px 3px #e0e0e0;
+}
+
+.row-gray {
+    background-color: $light-gray;
+}
+
+
+.btn-close-tr {
+    position: absolute;
+    padding: 1rem 1rem;
+    top: 0;
+    right: 0;
+}
+
+.with-overlay {
+    position: relative;
+
+    .overlay-cb1 {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .overlay-tr {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+.btn-circle {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.4rem;
+    border-radius: 1.5rem;
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.50);
+}
+
+.align-center-fill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button:last-child, a:last-child {
+        margin-top: auto
+    }
+}
+
+// rotates a expand/collapse chevron
+[data-bs-toggle="collapse"] {
+    .bi-up-down {
+        transition: .3s transform ease-in-out;
+    }
+
+    &.collapsed {
+        .bi-up-down {
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+.table-far {
+    width: auto;
+
+    > :not(caption) > * > * {
+        padding: 0.25rem 1rem;
+        text-align: left;
+    }
+}
+
+.border-right-md {
+    @include media-breakpoint-up(md) {
+        border-right: 2px solid $border-color;
+    }
+
+    @include media-breakpoint-down(md) {
+        margin-bottom: 2rem;
+    }
+}
+
+// right-align labels in horizontal forms
+@include media-breakpoint-up(sm) {
+    .col-form-label {
+        text-align: right;
+    }
+}
+
+// reduce font-size for small devices
+@include media-breakpoint-down(md) {
+    html {
+        font-size: 0.93rem;
+    }
+}
+
+// reduce font-size even more for extra small devices
+@include media-breakpoint-down(sm) {
+    html {
+        font-size: 0.86rem;
+    }
+}

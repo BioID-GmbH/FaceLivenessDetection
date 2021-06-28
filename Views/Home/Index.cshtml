@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "BioID Demo for Liveness Detection and PhotoVerify";
+}
+<div class="row">
+    <div class="col-sm-12 offset-md-2 col-md-8">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-lg-4 demo">
+                <a asp-controller="LivenessDetection" asp-action="index">
+                    <img src="~/images/LivenessDetection.svg" alt="Liveness Detection icon" />
+                </a>
+                <h4>Liveness Detection</h4>
+                <p>
+                    Test our Liveness Detection API which distinguishes a live person from fakes like images or videos, using a standard camera.
+                </p>
+                <a class="btn btn-success" asp-controller="LivenessDetection" asp-action="index">Try it out</a>
+            </div>
+            <div class="col-sm-6 col-lg-4 demo">
+                <a asp-controller="PhotoVerify" asp-action="index">
+                    <img src="~/images/PhotoVerify.svg" alt="PhotoVerify icon" />
+                </a>
+                <h4>PhotoVerify</h4>
+                <p>
+                    Verify ID ownership with PhotoVerify: Compare an ID photo with live samples, including liveness detection.
+                </p>
+                <a class="btn btn-success" asp-controller="PhotoVerify" asp-action="index">Try it out</a>
+            </div>
+        </div>
+    </div>
+</div>

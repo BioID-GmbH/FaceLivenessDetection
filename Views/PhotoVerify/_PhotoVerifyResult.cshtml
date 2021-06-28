@@ -1,0 +1,76 @@
+﻿@model PhotoVerifyResultModel
+@{
+    double[] fars = new double[] { 100, 1.0, 0.5, 0.25, 0.1, 0.01 };
+}
+
+@if (Model.Status != System.Net.HttpStatusCode.OK)
+{
+    <div class="text-danger h4">PhotoVerify failed:</div>
+    if (!string.IsNullOrEmpty(Model.ErrorString))
+    {
+        <p class="text-danger text-break">@Model.ErrorString</p>
+    }
+    else
+    {
+        <p class="text-danger">Status: @Model.Status.ToString()</p>
+    }
+}
+else
+{
+    if (Model.Accuracy > 0)
+    {
+        double far = fars[Model.Accuracy];
+        int calls = (int)(100.0 / far);
+        string color = Model.Accuracy > 3 ? "text-success" : "text-primary";
+
+        <div class="@color h4">LEVEL @Model.Accuracy</div>
+        <div class="@color h6">FAR: @far%</div>
+        <p>The ID-ownership has been verified at LEVEL @Model.Accuracy, which has a @far% false acceptance rate (FAR), i.e. a maximum of 1 out of @calls matchings might be wrong.</p>
+
+        <div>
+            <div class="text-primary">Verification Accuracy Levels:</div>
+            <div class="d-flex justify-content-center">
+                <table class="table table-far">
+                    <tr class="table-success"><th class="text-white bg-success">Level 5</th><td>FAR of @fars[5]%</td></tr>
+                    <tr class="table-success"><th class="text-white bg-success">Level 4</th><td>FAR of @fars[4]%</td></tr>
+                    <tr class="table-success"><th class="text-white bg-success">Level 3</th><td>FAR of @fars[3]%</td></tr>
+                    <tr class="table-primary"><th class="text-white bg-primary">Level 2</th><td>FAR of @fars[2]%</td></tr>
+                    <tr class="table-primary"><th class="text-white bg-primary">Level 1</th><td>FAR of @fars[1]%</td></tr>
+                </table>
+            </div>
+        </div>
+        @if (User.IsInRole("Employee") || User.IsInRole("Testing"))
+        {
+            <hr class="m-0" />
+            <div id="mismatchdiv">
+                <button id="mismatch" type="button" class="btn btn-sm btn-outline-danger mt-2 text-lowercase" data-id="@Model.Id" data-level="@Model.Accuracy">No, this photo should not match</button>
+                <div>
+                    <a id="privacynote" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Privacy Note" data-bs-content="Through clicking the button above you agree that we use and store your images for INTERNAL usage.
+                       The images will never be published or used for other purposes than training / testing our classifier.">
+                        <small class="text-success">
+                            Privacy note <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                            </svg>
+                        </small>
+                    </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-danger"><strong>Oops, ID-ownership could not be verified!</strong></p>
+        if (!string.IsNullOrEmpty(Model.ErrorString))
+        {
+            <p class="text-danger text-break">@Model.ErrorString</p>
+        }
+        <p>
+            <a href="https://www.youtube.com/watch?v=EMYCZdBDT54" target="_blank" title="PhotoVerify - Full Instruction">
+                Possible reasons
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                    <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                </svg>
+            </a>
+        </p>
+    }
+}

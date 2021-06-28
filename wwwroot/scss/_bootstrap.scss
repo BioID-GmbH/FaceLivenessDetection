@@ -1,0 +1,79 @@
+﻿// Implementation of our Bootstrap 5 BioID theme based on the guidelines from the marketing department
+
+// Colors
+
+// I'm not sure about our bioid blue: #3a62a0, or
+$bioid-blue: #3563a2;
+// link color, button background, etc.
+$bioid-green: #58b999;
+// bioid-green hover color: well, how can we apply this?
+$dark-green: #46967d;
+// default text color
+$text-color: #3c3c3c;
+// optional button background
+$btn-bg-gray: #dadada;
+// light background
+$light-gray: #f5f5f5;
+
+// Bootstrap varialbes pre-sets (I think, the problem was only with primary/secondary/success, the rest might work anyway)
+
+$blue: $bioid-blue;
+$green: $bioid-green;
+
+// import bootstrap variables here!?
+
+// Body
+$body-color: $text-color;
+$body-text-align: center;
+
+// Links
+
+$link-color: $bioid-green;
+$link-decoration: none;
+
+// Fonts
+
+// add Open Sans as primary font
+$font-family-sans-serif: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// $font-size-base effects the font size of the body text
+$font-size-base: 0.875rem;
+
+// we use semi-bold at least for button text
+$font-weight-semi-bold: 600 !default;
+
+// Buttons
+
+$btn-font-weight: $font-weight-semi-bold;
+$btn-border-radius: .5rem;
+$btn-padding-y: .5rem;
+$btn-padding-x: 2rem;
+
+// Navbar
+
+$navbar-light-color: $bioid-green;
+$navbar-light-hover-color: $dark-green;
+//$navbar-light-active-color: rgba($black, .9) !default;
+//$navbar-light-disabled-color: rgba($black, .3) !default;
+//$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+//$navbar-light-toggler-border-color: rgba($black, .1) !default;
+
+// import Bootstrap variables
+@import "../lib/bootstrap/scss/functions";
+@import "../lib/bootstrap/scss/variables";
+@import "../lib/bootstrap/scss/mixins";
+
+// Bootstrap varialbes overrides
+
+// default headings font weight is 500
+$headings-font-weight: $font-weight-bold;
+$headings-color: $primary;
+$headings-margin-bottom: 1rem;
+
+// default lead font weight is 300
+$lead-font-weight: $font-weight-normal;
+// use default font size for lead
+$lead-font-size: $font-size-base;
+
+// finally, import Bootstrap components
+@import "../lib/bootstrap/scss/bootstrap";
