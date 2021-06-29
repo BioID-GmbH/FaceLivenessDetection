@@ -4,4 +4,3 @@ bin/
 obj/
 .vs/
 **/packages/*
-wwwwroot/* linguist-vendored
