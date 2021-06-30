@@ -203,7 +203,7 @@ function sendImages() {
 ```
 
 
-Both images are uploaded to the web server. Now the web server call the BWS liveness detection API.
+Both images are uploaded to the web server. Now the web server calls the BWS liveness detection API.
 Please take a look: Controllers → _LivenessDetectionController.cs_ 
 
 `public async Task<IActionResult> ProcessAsync()`
@@ -283,7 +283,7 @@ function OnReadyStateChange() {
 
 Have a look here for more information on face [liveness detection][liveness].
 
-You can find more information about our [face recognition][bioid] technology at our website.
+You can find more information about our [face recognition software][bioid] technology at our website.
 
 
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
