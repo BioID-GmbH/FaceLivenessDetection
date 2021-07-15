@@ -7,14 +7,14 @@ This sample code demonstrates the functionality of [BioID Liveness Detection][li
 
 # Before you start developing a BioID app - you must have the following credentials
 - You need a [BioID Account][bioidaccountregister] with a **confirmed** email address.
-- After creating the BioID Account you can request a [trial instance][trial] for the BioID Web Service (BWS).
+- After creating the BioID Account you can request a free [trial instance][trial] for the BioID Web Service (BWS).
 - After the confirmation for access to a trial instance you can login to the [BWS Portal][bwsportal].
 - The BWS Portal shows you the activity for your installation and allows you to configure your test client.
 - After login to the BWS Portal configure your test client. This client is already created for you. In order to access this client, please do the steps below.
 - Click on your client, then click on Configuration on the left side.
-- On the right side you see the section _Web API Keys_. Now create a new WEP API key for your client implemenation by clicking the 'Plus' symbol.
+- On the right side you see the section _Web API Keys_. Now create a new WEP API key for your client implementation by clicking the 'Plus' symbol.
 - You will need the _AppId_ and _AppSecret_ for your client implementation. 
-> :warning: _Please note that we only store a hash of the secret i.e the secret value cannot be reconstructed! So you should copy the value of the secret now!_
+> :warning: _Please note that we only store a hash of the secret i.e the secret value cannot be reconstructed! So you should copy the value of the secret immediately!_
 
 
 # Now you are ready to create and run your first BioID Web App
