@@ -1,5 +1,6 @@
 *.suo
 *.user
+node_modules/
 bin/
 obj/
 .vs/
