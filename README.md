@@ -18,7 +18,9 @@ This sample code demonstrates the functionality of [BioID Liveness Detection][li
 
 
 # Now you are ready to create and run your first BioID Web App
-We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with .NET 5 and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
+We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 5][dotnet5] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
+
+Download a [development tool][dotnettools] for Windows, Linux or macOS. Use your favorite development environment like Visual Studio, Visual Studio Code, Visual Studio for Mac, .NET Core CLI or other .NET Tools.
 
 Please download this sample code and add your created _AppId_ and _AppSecret_ (see the steps before - [BWS Portal][bwsportal] and go to the file _appsettings.json_.
 
@@ -230,7 +232,7 @@ To receive the necessary BWS WebAPI access data (App-ID and App-Secret) you have
 
 The body contains the two images encoded into a Data-URL string using the data URI scheme as described in [RFC 2397][RFC2397].
 
-Finally we call the LiveDetection API.
+Finally we call the LiveDetection API. Please take a look at [LiveDetection API reference][livenessreference] section 'Response' for detailed information. 
 
 
 ## Call BWS PhotoVerify API - [Reference][photoverifyreference]
@@ -252,6 +254,9 @@ var requestBody = new
 using var content = JsonContent.Create(requestBody);
 using var response = await httpClient.PostAsync($"{_bwsSettings.Endpoint}photoverify2", content);
 ```
+
+Please take a look at [PhotoVerify API reference][photoverifyreference] section 'Response' for detailed information. 
+
 
 Finally send the result back to the client as feedback.
 Important is the block below. OnReadyStadeChange is the function to be executed when the readyState changes.
@@ -289,6 +294,8 @@ You can find more information about our [face recognition software][bioid] techn
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
 [trial]: https://bwsportal.bioid.com/register "Register for a trial instance"
 [bwsportal]: https://bwsportal.bioid.com "BWS Portal"
+[dotnet5]: https://dotnet.microsoft.com/download "Download .NET5"
+[dotnettools]: https://dotnet.microsoft.com/platform/tools ".NET Tools & Editors"
 [bwsreference]: https://developer.bioid.com/bwsreference/web-api "BWS Reference"
 [livenessreference]: https://developer.bioid.com/bwsreference/web-api/livedetection-web-api "LiveDetection Web API"
 [photoverifyreference]: https://developer.bioid.com/bwsreference/web-api/photoverify-web-api "PhotoVerify Web API"
