@@ -100,7 +100,7 @@ namespace FaceLivenessDetection.Controllers
                         if (error.Code == "UnnaturalMotionDetected" & isMobile)
                         {
                             // add additional hint for mobile devices
-                            resultHint = string.Concat(resultHint, new string("DontMoveDevice").HintFromResult());
+                            resultHint = resultHint.Insert(0, new string("DontMoveDevice").HintFromResult());
                         }
                     }
                 }
