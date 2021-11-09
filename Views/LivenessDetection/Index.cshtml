@@ -254,6 +254,7 @@
             var formData = new FormData(document.getElementById('capture-form'));
             formData.append('image1', firstCapturedImage);
             formData.append('image2', secondCapturedImage);
+            formData.append('isMobile', isMobileDevice().toString());
             xhr.open("POST", "/LivenessDetection/Process");
             xhr.send(formData);
         }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -53,6 +54,9 @@ namespace FaceLivenessDetection.Controllers
                     return PartialView("_LivenessDetectionResult", new LivenessDetectionResultModel { ErrorString = "At least one image was not uploaded completely!" });
                 }
 
+                // for additional hints we need to know is it a mobile device or not
+                bool isMobile = bool.Parse(Request.Form["isMobile"]);
+
                 using var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Utilities.EncodeCredentials(_bwsSettings.AppId, _bwsSettings.AppSecret));
                 var requestBody = new
@@ -61,7 +65,7 @@ namespace FaceLivenessDetection.Controllers
                     liveimage2 = "data:image/png;base64," + Convert.ToBase64String(image2)
                 };
                 using var content = JsonContent.Create(requestBody);
-                using var response = await httpClient.PostAsync($"{_bwsSettings.Endpoint}livedetection", content);
+                using var response = await httpClient.PostAsync($"{_bwsSettings.Endpoint}livedetection?state=details", content);
        
                 string msg = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != HttpStatusCode.OK)
@@ -78,8 +82,30 @@ namespace FaceLivenessDetection.Controllers
                     }
                     return PartialView("_LivenessDetectionResult", new LivenessDetectionResultModel { ErrorString = response.StatusCode.ToString() });
                 }
-                bool live = bool.Parse(msg);
-                return PartialView("_LivenessDetectionResult", new LivenessDetectionResultModel() { Live = live });
+
+                var result = JsonSerializer.Deserialize<LiveDetectionResult>(msg);
+                bool live = result.Success;
+
+                string resultHint = String.Empty;
+                if (result.Samples != null && result.Samples.Count > 0)
+                {
+                    foreach (var error in result.Samples.SelectMany(sampleResult => sampleResult.Errors).Select(error => error))
+                    {
+                        // Display error only as hint without title 'Liveness Detection says: This was fake!'
+                        if (error.Code == "NoFaceFound" || error.Code == "MultipleFacesFound")
+                            return PartialView("_LivenessDetectionResult", new LivenessDetectionResultModel { ErrorString = error.Code.HintFromResult() });
+
+                        string hint = error.Code.HintFromResult();
+                        resultHint = string.Concat(resultHint, resultHint.Contains(hint) ? String.Empty : hint);
+                        if (error.Code == "UnnaturalMotionDetected" & isMobile)
+                        {
+                            // add additional hint for mobile devices
+                            resultHint = string.Concat(resultHint, new string("DontMoveDevice").HintFromResult());
+                        }
+                    }
+                }
+
+                return PartialView("_LivenessDetectionResult", new LivenessDetectionResultModel() { Live = live, ResultHint = resultHint });
             }
             catch (Exception ex)
             {

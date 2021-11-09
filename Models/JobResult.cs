@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Xml.Serialization;
 
 namespace FaceLivenessDetection.Models
@@ -23,7 +24,25 @@ namespace FaceLivenessDetection.Models
         public string Message { get; set; }
 
         public string ErrorString { get; set; }
+
+        public string ResultHint { get; set; }
     }
+
+    public class LiveDetectionResult
+    {
+        public bool Success { get; set; }
+        public string JobID { get; set; }
+        public string State { get; set; }
+        public List<BwsError> Errors { get; set; }
+        public List<SampleResult> Samples { get; set; }
+    }
+
+    public class SampleResult
+    {
+        public List<BwsError> Errors { get; set; }
+        public BwsEyeCenters EyeCenters { get; set; }
+    }
+
 
     public class BwsError
     {
