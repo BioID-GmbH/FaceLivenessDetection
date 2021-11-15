@@ -29,6 +29,7 @@
 
 
   <ItemGroup>
+    <Folder Include="docs\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
