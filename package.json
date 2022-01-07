@@ -4,11 +4,11 @@
   "private": true,
   "devDependencies": {
     "gulp": "4.0.2",
-    "sass": "1.44.0",
-    "gulp-sass": "5.0.0",
-    "postcss": "8.4.4",
+    "sass": "1.46.0",
+    "gulp-sass": "5.1.0",
+    "postcss": "8.4.5",
     "gulp-postcss": "9.0.1",
-    "autoprefixer": "10.4.0",
+    "autoprefixer": "10.4.1",
     "del": "6.0.0"
   },
   "browserslist": [
