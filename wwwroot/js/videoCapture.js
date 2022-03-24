@@ -11,6 +11,8 @@ function startVideo(videoElement, successCallback, highRes = false, facingMode =
     const constraints = highRes ? { audio: false, video: { width: { ideal: 4096 } } } : { audio: false, video: { facingMode: facingMode, height: { ideal: 600, min: 480 } } };
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function (mediaStream) {
+            // Virtual camera devices are denied!
+            if (isVirtualDevice(mediaStream)) return;
             console.log('Media stream created:', mediaStream.getVideoTracks()[0]);
             videoElement.srcObject = mediaStream;
             videoElement.onloadedmetadata = function (e) {
@@ -208,4 +210,30 @@ function isMobileDevice() {
         }
     }
     return hasTouchScreen;
+}
+
+// Virtual camera devices are denied because we don`t allow video injection! 
+function isVirtualDevice(mediaStream) {
+    // check if device label is on the blacklist 
+    const blacklistDevices = [
+        "OBS Virtual Camera",
+        "OBS-Camera",
+        "e2eSoft VCAM",
+        "Avatarify",
+        "ManyCam Virtual",
+        "Logi Capture"
+    ];
+    let isBlacklisted = false;
+    let deviceLabel = mediaStream.getVideoTracks()[0].label.toLowerCase();
+    for (const device of blacklistDevices) {
+        if (deviceLabel.includes(device.toLowerCase())) {
+            isBlacklisted = true;
+            console.log('Virtual camera detected: ' + deviceLabel);
+            if (isBlacklisted) {
+                alert('Virtual camera (' + device + ') was detected and access is denied. Video injection is not allowed!');
+                break;
+            }
+        }
+    }
+    return isBlacklisted;
 }
