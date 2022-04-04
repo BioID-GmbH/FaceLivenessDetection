@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "gulp": "4.0.2",
-    "sass": "1.49.9",
+    "sass": "1.49.11",
     "gulp-sass": "5.1.0",
     "postcss": "8.4.12",
     "gulp-postcss": "9.0.1",
