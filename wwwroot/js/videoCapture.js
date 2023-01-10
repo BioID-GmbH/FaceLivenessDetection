@@ -221,7 +221,8 @@ function isVirtualDevice(mediaStream) {
         "e2eSoft VCAM",
         "Avatarify",
         "ManyCam Virtual",
-        "Logi Capture"
+        "Logi Capture",
+        "Snap Camera"
     ];
     let isBlacklisted = false;
     let deviceLabel = mediaStream.getVideoTracks()[0].label.toLowerCase();

@@ -4,9 +4,9 @@
   "private": true,
   "devDependencies": {
     "gulp": "4.0.2",
-    "sass": "1.56.1",
+    "sass": "1.57.1",
     "gulp-sass": "5.1.0",
-    "postcss": "8.4.19",
+    "postcss": "8.4.21",
     "gulp-postcss": "9.0.1",
     "autoprefixer": "10.4.13",
     "del": "6.1.1"
