@@ -18,7 +18,7 @@ This sample code demonstrates the functionality of [BioID Liveness Detection][li
 
 
 # Now you are ready to create and run your first BioID Web App
-We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 6][dotnet6] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
+We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 7][dotnet7] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
 
 Download a [development tool][dotnettools] for Windows, Linux or macOS. Use your favorite development environment like Visual Studio, Visual Studio Code, Visual Studio for Mac, .NET Core CLI or other .NET Tools.
 
@@ -294,11 +294,11 @@ You can find more information about our [face recognition software][bioid] techn
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
 [trial]: https://bwsportal.bioid.com/register "Register for a trial instance"
 [bwsportal]: https://bwsportal.bioid.com "BWS Portal"
-[dotnet6]: https://dotnet.microsoft.com/download "Download .NET6"
+[dotnet7]: https://dotnet.microsoft.com/download "Download .NET7"
 [dotnettools]: https://dotnet.microsoft.com/platform/tools ".NET Tools & Editors"
-[bwsreference]: https://developer.bioid.com/bwsreference/web-api "BWS Reference"
-[livenessreference]: https://developer.bioid.com/bwsreference/web-api/livedetection-web-api "LiveDetection Web API"
-[photoverifyreference]: https://developer.bioid.com/bwsreference/web-api/photoverify-web-api "PhotoVerify Web API"
+[bwsreference]: https://developer.bioid.com/classicbws/bwsreference/webapi "BWS Reference"
+[livenessreference]: https://developer.bioid.com/classicbws/bwsreference/webapi/livedetection "LiveDetection Web API"
+[photoverifyreference]: https://developer.bioid.com/classicbws/bwsreference/webapi/photoverify "PhotoVerify Web API"
 [RFC2397]: https://datatracker.ietf.org/doc/html/rfc2397 "RFC 2397"
 [playground]: https://playground.bioid.com "BioID Playground"
 [liveness]: https://www.bioid.com/liveness-detection/ "presentation attack detection"
