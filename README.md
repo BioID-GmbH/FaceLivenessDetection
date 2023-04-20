@@ -54,7 +54,7 @@ A button element is defined for starting image capturing for liveness detection.
 
 ```html
 <canvas class="align-bottom mw-100" id="drawingcanvas"></canvas>
-<button id="capture" class="btn btn-success">Basic</button>
+<button id="capture" class="btn btn-primary">Start</button>
 ```
 
 These two html elements are the minimum requirement to capture and process the image data.

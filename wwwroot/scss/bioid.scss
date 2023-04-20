@@ -1,11 +1,9 @@
 ﻿// import our customized Bootstrap variables
 @import "bootstrap";
+// load custom fonts used by BioID
+@import "fonts";
 
 // main layout
-
-body {
-}
-
 main {
     // keep some space on top for the navbar
     > .container-fluid {
@@ -13,13 +11,9 @@ main {
     }
 }
 
-a {
-    //font-weight: $font-weight-semi-bold;
-}
-
 // the fixed navbar style
 .navbar {
-    min-height: 5.15rem;
+    min-height: 6rem;
     padding: 1rem;
 
     .navbar-title {
@@ -32,7 +26,8 @@ a {
 
     .navbar-brand {
         width: 7rem;
-        height: 3.15rem;
+        height: 3rem;
+        padding-top: 0rem;
     }
 
     .navbar-logo {
@@ -40,14 +35,14 @@ a {
     }
 
     &.bg-light {
-        background-color: #f1f1f1;
-        box-shadow: 0 3px 3px #e0e0e0;
+        background-color: white !important;
+        box-shadow: 0px 1px 5px tint-color($bioid-dark, 85%);
     }
 
     @include media-breakpoint-up(md) {
         &.bg-light {
-            background-color: rgba(#f0f0f0, .95) !important;
-            box-shadow: 0 3px 3px rgba(#e0e0e0, .95);
+            background-color: rgba(white, .95) !important;
+            box-shadow: 0px 1px 5px tint-color($bioid-dark, 85%);
         }
     }
 
@@ -65,26 +60,10 @@ a {
 }
 
 // our custom buttons
-
 .btn {
     text-transform: uppercase;
-
-    &-success,
-    &-info,
-    &-warning {
-        color: $white;
-
-        &:hover,
-        &:focus {
-            color: $white;
-        }
-    }
-
-    &-success:hover, &-outline-success:hover,
-    &-sucess:focus, &-outline-success:focus {
-        color: $white;
-        background-color: $dark-green; // ~ shade-color($bioid-green, 20%);
-    }
+    border-radius: .3rem;
+    padding: .5rem 2rem .5rem 2rem
 }
 
 .btn-nav {
@@ -107,20 +86,20 @@ a {
     }
 
     &:hover, &:focus {
-        background-color: $bioid-green;
-        border-color: $bioid-green;
+        background-color: $bioid-blue;
+        border-color: $bioid-blue;
     }
 
     &.btn-nav1 {
-        top: 7rem;
+        top: 8rem;
     }
 
     &.btn-nav2 {
-        top: 13rem;
+        top: 14.5rem;
     }
 
     &.btn-nav3 {
-        top: 19rem;
+        top: 21rem;
     }
 }
 
@@ -161,14 +140,11 @@ a {
     }
 }
 
-.graybox {
-    padding: 1rem;
-    background-color: $light-gray;
-    box-shadow: 3px 3px 3px #e0e0e0;
+.row-gray1 {
+    background-color: $gray-100;
 }
-
-.row-gray {
-    background-color: $light-gray;
+.row-gray2 {
+    background-color: $gray-200;
 }
 
 

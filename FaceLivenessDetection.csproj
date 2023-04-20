@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler2022" Version="1.14.10" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
   </ItemGroup>
 
 
@@ -35,6 +35,16 @@
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\model\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\poppins-v20-latin-300.woff2" />
+    <None Include="wwwroot\fonts\poppins-v20-latin-500.woff2" />
+    <None Include="wwwroot\fonts\poppins-v20-latin-600.woff2" />
+    <None Include="wwwroot\fonts\poppins-v20-latin-700.woff2" />
+    <None Include="wwwroot\fonts\poppins-v20-latin-italic.woff2" />
+    <None Include="wwwroot\fonts\poppins-v20-latin-regular.woff2" />
   </ItemGroup>
 
 </Project>

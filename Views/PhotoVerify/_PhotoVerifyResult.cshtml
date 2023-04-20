@@ -21,7 +21,7 @@ else
     {
         double far = fars[Model.Accuracy];
         int calls = (int)(100.0 / far);
-        string color = Model.Accuracy > 3 ? "text-success" : "text-primary";
+        string color = Model.Accuracy > 3 ? "text-secondary" : "text-primary";
 
         <div class="@color h4">LEVEL @Model.Accuracy</div>
         <div class="@color h6">FAR: @far%</div>
@@ -31,9 +31,9 @@ else
             <div class="text-primary">Verification Accuracy Levels:</div>
             <div class="d-flex justify-content-center">
                 <table class="table table-far">
-                    <tr class="table-success"><th class="text-white bg-success">Level 5</th><td>FAR of @fars[5]%</td></tr>
-                    <tr class="table-success"><th class="text-white bg-success">Level 4</th><td>FAR of @fars[4]%</td></tr>
-                    <tr class="table-success"><th class="text-white bg-success">Level 3</th><td>FAR of @fars[3]%</td></tr>
+                    <tr class="table-secondary"><th class="text-white bg-secondary">Level 5</th><td>FAR of @fars[5]%</td></tr>
+                    <tr class="table-secondary"><th class="text-white bg-secondary">Level 4</th><td>FAR of @fars[4]%</td></tr>
+                    <tr class="table-secondary"><th class="text-white bg-secondary">Level 3</th><td>FAR of @fars[3]%</td></tr>
                     <tr class="table-primary"><th class="text-white bg-primary">Level 2</th><td>FAR of @fars[2]%</td></tr>
                     <tr class="table-primary"><th class="text-white bg-primary">Level 1</th><td>FAR of @fars[1]%</td></tr>
                 </table>
