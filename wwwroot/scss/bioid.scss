@@ -13,21 +13,14 @@ main {
 
 // the fixed navbar style
 .navbar {
-    min-height: 6rem;
     padding: 1rem;
 
     .navbar-title {
         position: absolute;
-        top: 2rem;
+        top: 2.5rem;
         left: 50%;
         transform: translate(-50%);
         padding: 0 2rem;
-    }
-
-    .navbar-brand {
-        width: 7rem;
-        height: 3rem;
-        padding-top: 0rem;
     }
 
     .navbar-logo {
@@ -39,10 +32,15 @@ main {
         box-shadow: 0px 1px 5px tint-color($bioid-dark, 85%);
     }
 
+    @include media-breakpoint-down(md) {
+        .navbar-nav {
+            padding-top: 1rem;
+        }
+    }
+
     @include media-breakpoint-up(md) {
         &.bg-light {
             background-color: rgba(white, .95) !important;
-            box-shadow: 0px 1px 5px tint-color($bioid-dark, 85%);
         }
     }
 
@@ -143,6 +141,7 @@ main {
 .row-gray1 {
     background-color: $gray-100;
 }
+
 .row-gray2 {
     background-color: $gray-200;
 }

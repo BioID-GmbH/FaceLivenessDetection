@@ -1,6 +1,6 @@
 ﻿// Implementation of our Bootstrap 5 BioID theme based on the guidelines from the marketing department
 
-// NOTE: if we update to bootstrap 5.3, we also have to update this file!!!
+// NOTE: has been updated to support color themes of bootstrap 5.3, see https://getbootstrap.com/docs/5.3/customize/sass/
 
 
 // Colors
@@ -23,12 +23,8 @@ $bioid-dark5: #3963a2;
 $bioid-green: #58b999;
 // bioid accent color coral
 $bioid-coral: #ee726b;
-
-// bioid-green hover color: well, how can we apply this?
+// bioid-green hover color (not in brandbook)
 $dark-green: #46967d;
-
-// We could create our own map
-$bioid-colors: ( "bioid-blue": $bioid-blue, "bioid-dark": $bioid-dark, "bioid-coral": $bioid-coral, "bioid-green": $bioid-green, "dark-green": $dark-green );
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../lib/bootstrap/scss/functions";
@@ -44,18 +40,18 @@ $red: #bf2c37;
 // bioid technical gray
 $gray: #9d9d9d;
 
-// use our bioid light blue light color
+// use our bioid light blue as light color
 $light: $bioid-blue5;
 // use our bioid dark blue as dark color
 $dark: $bioid-dark;
-// use our bioid blue as bue and primary
+// use our bioid blue as blue and primary
 $primary: $bioid-blue;
 // use our 1st accent as secondary
 $secondary: $bioid-green;
 // use our 2nd accent as info
 $info: $bioid-coral;
 $success: $green;
-// a custom yellow
+// a custom yellow!?
 $yellow: #fcbc56; //#ffc107
 $warning: $yellow;
 $danger: $red;
@@ -68,9 +64,13 @@ $min-contrast-ratio: 2.0;
 $body-color: $bioid-dark;
 // Links
 $link-color: $bioid-green;
+$link-hover-color: $dark-green;
+$link-color-dark: $bioid-green;
+$link-hover-color-dark: $dark-green;
 $link-decoration: none;
 // Code
 $code-color: $bioid-coral;
+$code-color-dark: $bioid-coral;
 
 // Playground specific!
 $body-text-align: center;
@@ -85,7 +85,6 @@ $font-family-monospace: "FiraCode", SFMono-Regular, Menlo, Monaco, Consolas, "Li
 
 // $font-size-base effects the font size of the body text
 $font-size-base: 0.9375rem;
-//$font-size-base: 0.875rem;
 
 // lead font-size and weight
 $lead-font-size: $font-size-base * 1.1;
@@ -95,6 +94,7 @@ $headings-margin-bottom: 1rem;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../lib/bootstrap/scss/variables";
+@import "../lib/bootstrap/scss/variables-dark";
 
 // default headings font weight is semi bold
 $headings-font-weight: $font-weight-semibold;
