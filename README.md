@@ -288,7 +288,9 @@ function OnReadyStateChange() {
 
 Have a look here for more information on face [liveness detection][liveness].
 
-You can find more information about our [face recognition software][bioid] technology at our website.
+You can find more information about our [face recognition software][facerecognition] technology at our website.
+
+Here is all about our [face recognition company BioID][bioid].
 
 
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
@@ -302,7 +304,9 @@ You can find more information about our [face recognition software][bioid] techn
 [RFC2397]: https://datatracker.ietf.org/doc/html/rfc2397 "RFC 2397"
 [playground]: https://playground.bioid.com "BioID Playground"
 [liveness]: https://www.bioid.com/liveness-detection/ "presentation attack detection"
-[photoverify]: https://www.bioid.com/identity-proofing-photoverify/ "PhotoVerify"
+[photoverify]: https://www.bioid.com/identity-verification-photoverify/ "PhotoVerify"
 [bioid]: https://www.bioid.com "BioID - be recognized"
+[facerecognition]: https://www.bioid.com/face-recognition-software/
 [livenessvideo]: https://youtu.be/14ivZ9shtmY
 [photoverifyvideo]: https://youtu.be/EMYCZdBDT54
+
