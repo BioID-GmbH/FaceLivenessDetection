@@ -18,7 +18,7 @@ This sample code demonstrates the functionality of [BioID Liveness Detection][li
 
 
 # Now you are ready to create and run your first BioID Web App
-We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 7][dotnet7] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
+We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 8][dotnet8] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
 
 Download a [development tool][dotnettools] for Windows, Linux or macOS. Use your favorite development environment like Visual Studio, Visual Studio Code, Visual Studio for Mac, .NET Core CLI or other .NET Tools.
 
@@ -296,7 +296,7 @@ Here is all about our [face recognition company BioID][bioid].
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
 [trial]: https://bwsportal.bioid.com/register "Register for a trial instance"
 [bwsportal]: https://bwsportal.bioid.com "BWS Portal"
-[dotnet7]: https://dotnet.microsoft.com/download "Download .NET7"
+[dotnet8]: https://dotnet.microsoft.com/download "Download .NET8"
 [dotnettools]: https://dotnet.microsoft.com/platform/tools ".NET Tools & Editors"
 [bwsreference]: https://developer.bioid.com/classicbws/bwsreference/webapi "BWS Reference"
 [livenessreference]: https://developer.bioid.com/classicbws/bwsreference/webapi/livedetection "LiveDetection Web API"
