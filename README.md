@@ -10,15 +10,15 @@ This sample code demonstrates the functionality of [BioID Liveness Detection][li
 - After creating the BioID Account you can request a free [trial instance][trial] for the BioID Web Service (BWS).
 - After the confirmation for access to a trial instance you can login to the [BWS Portal][bwsportal].
 - The BWS Portal shows you the activity for your installation and allows you to configure your test client.
-- After login to the BWS Portal configure your test client. This client is already created for you. In order to access this client, please do the steps below.
-- Click on your client, then click on Configuration on the left side.
-- On the right side you see the section _Web API Keys_. Now create a new WEP API key for your client implementation by clicking the 'Plus' symbol.
+- After login to the BWS Portal configure your test client. In order to access this client, please do the steps below.
+- Click on 'Show client keys' on your clients (the 'key' icon on the right). The dialog 'Classic keys' opens.
+- Now create a new classic key (WEB API key) for your client implementation by clicking the '+' symbol.
 - You will need the _AppId_ and _AppSecret_ for your client implementation. 
 > :warning: _Please note that we only store a hash of the secret i.e the secret value cannot be reconstructed! So you should copy the value of the secret immediately!_
 
 
 # Now you are ready to create and run your first BioID Web App
-We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 7][dotnet7] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
+We offer a ready-to-use Liveness Detection/PhotoVerify Wep App sample. This sample is created with [.NET 8][dotnet8] and runs under Windows, Linux or MacOS. Please note: PhotoVerify performs a face match between ID photo and selfie in addition to liveness detection.
 
 Download a [development tool][dotnettools] for Windows, Linux or macOS. Use your favorite development environment like Visual Studio, Visual Studio Code, Visual Studio for Mac, .NET Core CLI or other .NET Tools.
 
@@ -296,7 +296,7 @@ Here is all about our [face recognition company BioID][bioid].
 [bioidaccountregister]: https://account.bioid.com/Account/Register "Register a BioID account" 
 [trial]: https://bwsportal.bioid.com/register "Register for a trial instance"
 [bwsportal]: https://bwsportal.bioid.com "BWS Portal"
-[dotnet7]: https://dotnet.microsoft.com/download "Download .NET7"
+[dotnet8]: https://dotnet.microsoft.com/download "Download .NET8"
 [dotnettools]: https://dotnet.microsoft.com/platform/tools ".NET Tools & Editors"
 [bwsreference]: https://developer.bioid.com/classicbws/bwsreference/webapi "BWS Reference"
 [livenessreference]: https://developer.bioid.com/classicbws/bwsreference/webapi/livedetection "LiveDetection Web API"
