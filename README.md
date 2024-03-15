@@ -1,5 +1,5 @@
-﻿# Liveness Detection and PhotoVerify Face Match for KYC
-This sample code demonstrates the functionality of [BioID Liveness Detection][liveness] API and [BioID PhotoVerify][photoverify] API. Please visit our [BioID Playground][playground] to test these biometric technologies. The web apps Liveness Detection and PhotoVerify at the BioID Playground are based on the following source code.
+﻿# Liveness Detection, Deepfake Detection and PhotoVerify Face Match for KYC
+This sample code demonstrates the functionality of [BioID Liveness Detection][liveness] API (including Deepfake Detection) and [BioID PhotoVerify][photoverify] API. Please visit our [BioID Playground][playground] to test these biometric technologies. The web apps Liveness Detection and PhotoVerify at the BioID Playground are based on the following source code.
 <p align="center">
 <a href="https://youtu.be/14ivZ9shtmY"><img src="https://img.youtube.com/vi/14ivZ9shtmY/maxresdefault.jpg" width="50%"></a>
 <a href="https://youtu.be/EMYCZdBDT54"><img src="https://img.youtube.com/vi/EMYCZdBDT54/maxresdefault.jpg" width="50%"></a>
