@@ -1,5 +1,5 @@
-﻿# Liveness Detection and PhotoVerify Face Match for KYC
-This sample code demonstrates the functionality of [BioID Liveness Detection][liveness] API and [BioID PhotoVerify][photoverify] API. Please visit our [BioID Playground][playground] to test these biometric technologies. The web apps Liveness Detection and PhotoVerify at the BioID Playground are based on the following source code.
+﻿# Liveness Detection, Deepfake Detection and PhotoVerify Face Match for KYC
+This sample code demonstrates the functionality of [BioID Liveness Detection][liveness] API (including Deepfake Detection) and [BioID PhotoVerify][photoverify] API. Please visit our [BioID Playground][playground] to test these biometric technologies. The web apps Liveness Detection and PhotoVerify at the BioID Playground are based on the following source code.
 <p align="center">
 <a href="https://youtu.be/14ivZ9shtmY"><img src="https://img.youtube.com/vi/14ivZ9shtmY/maxresdefault.jpg" width="50%"></a>
 <a href="https://youtu.be/EMYCZdBDT54"><img src="https://img.youtube.com/vi/EMYCZdBDT54/maxresdefault.jpg" width="50%"></a>
@@ -286,7 +286,7 @@ function OnReadyStateChange() {
 };
 ```
 
-Have a look here for more information on face [liveness detection][liveness].
+Have a look here for more information on face [liveness detection][liveness] (including [Deepfakes][deepfake]).
 
 You can find more information about our [face recognition software][facerecognition] technology at our website.
 
@@ -309,4 +309,5 @@ Here is all about our [face recognition company BioID][bioid].
 [facerecognition]: https://www.bioid.com/face-recognition-software/
 [livenessvideo]: https://youtu.be/14ivZ9shtmY
 [photoverifyvideo]: https://youtu.be/EMYCZdBDT54
+[deepfake]: https://www.bioid.com/deepfake-detection/
 
