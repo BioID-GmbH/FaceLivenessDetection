@@ -15,14 +15,9 @@ using System.Text.Json;
 
 namespace FaceLivenessDetection.Controllers
 {
-    public class PhotoVerifyController : Controller
+    public class PhotoVerifyController(IOptions<BwsWebApiSettings> bwsSettingsAccessor) : Controller
     {
-        private readonly BwsWebApiSettings _bwsSettings;
-
-        public PhotoVerifyController(IOptions<BwsWebApiSettings> bwsSettingsAccessor)
-        {
-            _bwsSettings = bwsSettingsAccessor.Value;
-        }
+        private readonly BwsWebApiSettings _bwsSettings = bwsSettingsAccessor.Value;
 
         public IActionResult Index()
         {

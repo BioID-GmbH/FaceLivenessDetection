@@ -30,7 +30,7 @@ namespace FaceLivenessDetection
             "LiveDetectionFailed" => "The submitted samples do not prove that they are recorded from a live person.",
             "NoTemplateAvailable" => "You have not enrolled yourself yet.",
             "NotEnoughSamples" => "Not enough valid samples have been provided.",
-            "ChallengeResponseFailed" => "ChallengeResponseFailed", // we do not use challenge respose here
+            "ChallengeResponseFailed" => "ChallengeResponseFailed", // we do not use challenge response here
             "ExecutionOfJobTimedOut" => "ExecutionOfJobTimedOut", // ups
             "MissingData" => "Not all images have been supplied.",
             "InvalidSampleData" => "The submitted samples could not be decoded into images.",

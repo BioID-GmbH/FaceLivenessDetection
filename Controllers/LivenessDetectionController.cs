@@ -14,14 +14,9 @@ using System.Threading.Tasks;
 
 namespace FaceLivenessDetection.Controllers
 {
-    public class LivenessDetectionController : Controller
+    public class LivenessDetectionController(IOptions<BwsWebApiSettings> bwsSettingsAccessor) : Controller
     {
-        private readonly BwsWebApiSettings _bwsSettings;
-
-        public LivenessDetectionController(IOptions<BwsWebApiSettings> bwsSettingsAccessor)
-        {
-            _bwsSettings = bwsSettingsAccessor.Value;
-        }
+        private readonly BwsWebApiSettings _bwsSettings = bwsSettingsAccessor.Value;
 
         public IActionResult Index()
         {
