@@ -24,7 +24,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="BuildWebCompiler2022" Version="1.14.14" />
+    <PackageReference Include="BuildWebCompiler2022" Version="1.14.15" />
   </ItemGroup>
 
 
