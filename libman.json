@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "defaultProvider": "unpkg",
+  "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "bootstrap@5.3.3",
+      "library": "bootstrap@5.3.5",
       "destination": "wwwroot/lib/bootstrap/"
     }
   ]
