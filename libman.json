@@ -3,7 +3,7 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "bootstrap@5.3.5",
+      "library": "bootstrap@5.3.6",
       "destination": "wwwroot/lib/bootstrap/"
     }
   ]
